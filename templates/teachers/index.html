@@ -1,0 +1,14 @@
+<h1>Professores</h1>
+<a href="{{ url_for('teachers.create') }}">Novo Professor</a>
+<ul>
+    {% for teacher in teachers %}
+        <li>
+            {{ teacher['name'] }} - {{ teacher['phone'] }}
+            <a href="{{ url_for('teachers.edit', id=teacher['id']) }}">Editar</a>
+            <a href="{{ url_for('teachers.disciplines', id=teacher['id']) }}">Gerenciar Disciplinas</a>
+            <form action="{{ url_for('teachers.delete', id=teacher['id']) }}" method="post" style="display:inline;">
+                <button type="submit">Excluir</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
