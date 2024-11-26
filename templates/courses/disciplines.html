@@ -1,0 +1,14 @@
+<h1>Gerenciar Disciplinas para o Curso: {{ course['course']['name'] }}</h1>
+<form method="post">
+    <ul>
+        {% for discipline in all_disciplines %}
+            <li>
+                <input type="checkbox" name="disciplines" value="{{ discipline['id'] }}"
+                       {% if discipline.id in course_discipline_ids %} checked {% endif %} />
+                {{ discipline['name'] }}
+            </li>
+        {% endfor %}
+    </ul>
+    <button type="submit">Salvar</button>
+</form>
+<a href="{{ url_for('courses.index') }}">Voltar</a>
