@@ -2,41 +2,41 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from models.student import Student
 from models.course import Course
 
-aluno_bp = Blueprint('alunos', __name__, url_prefix='/alunos')
+student_bp = Blueprint('students', __name__, url_prefix='/students')
 
-@aluno_bp.route('/')
+@student_bp.route('/')
 def index():
-    alunos = Aluno.get_all()
-    return render_template('alunos/index.html', alunos=alunos)
+    students = Student.get_all()
+    return render_template('students/index.html', students=students)
 
-@aluno_bp.route('/create', methods=['GET', 'POST'])
+@student_bp.route('/create', methods=['GET', 'POST'])
 def create():
-    cursos = Curso.get_all()
+    courses = Course.get_all()
     if request.method == 'POST':
-        nome = request.form['nome']
+        name = request.form['name']
         cpf = request.form['cpf']
-        endereco = request.form['endereco']
-        senha = request.form['senha']
-        curso_id = request.form['curso_id'] if 'curso_id' in request.form else None
-        Aluno.create(nome, cpf, endereco, senha, curso_id)
-        return redirect(url_for('alunos.index'))
-    return render_template('alunos/create.html', cursos=cursos)
+        address = request.form['address']
+        password = request.form['password']
+        course_id = request.form['course_id'] if 'course_id' in request.form else None
+        Student.create(name, cpf, address, password, course_id)
+        return redirect(url_for('students.index'))
+    return render_template('students/create.html', courses=courses)
 
-@aluno_bp.route('/<int:id>/edit', methods=['GET', 'POST'])
+@student_bp.route('/<int:id>/edit', methods=['GET', 'POST'])
 def edit(id):
-    aluno = Aluno.get_by_id(id)
-    cursos = Curso.get_all()
+    student = Student.get_by_id(id)
+    courses = Course.get_all()
     if request.method == 'POST':
-        nome = request.form['nome']
+        name = request.form['name']
         cpf = request.form['cpf']
-        endereco = request.form['endereco']
-        senha = request.form['senha']
-        curso_id = request.form['curso_id'] if 'curso_id' in request.form else None
-        Aluno.update(id, nome, cpf, endereco, senha, curso_id)
-        return redirect(url_for('alunos.index'))
-    return render_template('alunos/edit.html', aluno=aluno, cursos=cursos)
+        address = request.form['address']
+        password = request.form['password']
+        course_id = request.form['course_id'] if 'course_id' in request.form else None
+        Student.update(id, name, cpf, address, password, course_id)
+        return redirect(url_for('students.index'))
+    return render_template('students/edit.html', student=student, courses=courses)
 
-@aluno_bp.route('/<int:id>/delete', methods=['POST'])
+@student_bp.route('/<int:id>/delete', methods=['POST'])
 def delete(id):
-    Aluno.delete(id)
-    return redirect(url_for('alunos.index'))
+    Student.delete(id)
+    return redirect(url_for('students.index'))

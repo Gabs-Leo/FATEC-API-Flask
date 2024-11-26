@@ -61,7 +61,7 @@ def init():
 
     # Student
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS students (
+        CREATE TABLE IF NOT EXISTS student (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
             cpf TEXT NOT NULL UNIQUE,
