@@ -33,7 +33,7 @@ def edit(id):
     return render_template('teachers/edit.html', teachers=teacher['teacher'])
 
 @teacher_bp.route('/<int:id>/disciplines', methods=['GET', 'POST'])
-def disciplinas(id):
+def disciplines(id):
     teacher = Teacher.get_by_id(id)
     all_disciplines = Discipline.get_all()
     if request.method == 'POST':
